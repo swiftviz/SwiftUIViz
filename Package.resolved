@@ -3,7 +3,7 @@
     "pins": [
       {
         "package": "SwiftViz",
-        "repositoryURL": "https://github.com/swiftviz/swiftviz",
+        "repositoryURL": "https://github.com/swiftviz/SwiftViz",
         "state": {
           "branch": null,
           "revision": "33ce6c2890cb219569cea03d13c02bb54cd6b1a6",
