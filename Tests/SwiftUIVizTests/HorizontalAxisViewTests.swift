@@ -20,6 +20,9 @@ final class HorizontalAxisViewTests: XCTestCase {
         let exampleView = HorizontalAxisView(scale: LinearScale(domain: 0 ... 5.0, isClamped: false),
                                              leftInset: 25.0,
                                              rightInset: 25.0)
+        let path = try exampleView.inspect().geometryReader().zStack().shape(0)
+        XCTAssertNotNil(path)
+
         XCTAssertNotNil(exampleView)
     }
 }
