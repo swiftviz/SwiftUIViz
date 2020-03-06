@@ -59,18 +59,20 @@ public struct HorizontalAxisView<ScaleType: Scale>: View {
     }
 }
 
-struct HorizontalAxisView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            HorizontalAxisView(scale: LinearScale(domain: 0 ... 5.0, isClamped: false),
-                               leftInset: 25.0,
-                               rightInset: 25.0)
-                .frame(width: 400, height: 50, alignment: .center)
+#if DEBUG
+    struct HorizontalAxisView_Previews: PreviewProvider {
+        static var previews: some View {
+            Group {
+                HorizontalAxisView(scale: LinearScale(domain: 0 ... 5.0, isClamped: false),
+                                   leftInset: 25.0,
+                                   rightInset: 25.0)
+                    .frame(width: 400, height: 50, alignment: .center)
 
-            HorizontalAxisView(scale: LogScale(domain: 1 ... 10.0, isClamped: false),
-                               leftInset: 25.0,
-                               rightInset: 25.0)
-                .frame(width: 400, height: 50, alignment: .center)
+                HorizontalAxisView(scale: LogScale(domain: 1 ... 10.0, isClamped: false),
+                                   leftInset: 25.0,
+                                   rightInset: 25.0)
+                    .frame(width: 400, height: 50, alignment: .center)
+            }
         }
     }
-}
+#endif
