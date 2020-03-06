@@ -14,5 +14,5 @@ Loosely based on the APIs and mechanisms created by Mike Bostock and contributor
     cd SwiftUIViz
     swift build
     swift test -v
-    swiftlnt
+    swiftlint
 
