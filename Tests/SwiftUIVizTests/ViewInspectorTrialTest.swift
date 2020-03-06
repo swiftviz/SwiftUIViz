@@ -5,9 +5,9 @@
 //
 
 import SwiftUI
-import XCTest
-import ViewInspector
 @testable import SwiftUIViz
+import ViewInspector
+import XCTest
 
 struct ContentView: View {
     var body: some View {
@@ -20,7 +20,6 @@ extension ContentView: Inspectable {}
 // https://github.com/nalexn/ViewInspector/blob/master/guide.md
 
 final class ContentViewTests: XCTestCase {
-
     func testStringValue() throws {
         let sut = ContentView()
         let value = try sut.inspect().text().string()
