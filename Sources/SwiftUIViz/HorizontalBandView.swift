@@ -10,7 +10,7 @@ import SwiftUI
 import SwiftViz
 
 struct HorizontalBandView<ScaleType: Scale>: View {
-    var scale: ScaleType
+    let scale: ScaleType
 
     init(scale: ScaleType) {
         self.scale = scale
@@ -29,7 +29,7 @@ struct HorizontalBandView<ScaleType: Scale>: View {
             ZStack {
                 // boxes in the view
                 Rectangle().fill(Color.white)
-                Rectangle().stroke()
+                Rectangle().stroke(Color.primary)
                 Path { path in
                     // draw each tick in the line
                     for tick in self.tickList(geometry: geometry) {
@@ -38,9 +38,6 @@ struct HorizontalBandView<ScaleType: Scale>: View {
                     }
                 }.stroke(lineWidth: 0.5)
             }
-//            ForEach(self.tickList(geometry: geometry)) { tickStruct in
-//                Text(tickStruct.stringValue).position(x: tickStruct.rangeLocation, y: geometry.size.height / 2)
-//            }
         }
     }
 }
