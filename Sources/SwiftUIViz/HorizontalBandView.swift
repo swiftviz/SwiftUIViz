@@ -1,6 +1,6 @@
 //
 //  HorizontalAxisBandView.swift
-//  
+//
 //
 //  Created by Joseph Heck on 3/4/20.
 //  Copyright © 2020 JFH Consulting. All rights reserved.

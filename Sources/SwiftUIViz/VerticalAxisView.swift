@@ -1,6 +1,6 @@
 //
 //  VerticalAxisView.swift
-//  
+//
 //
 //  Created by Joseph Heck on 2/12/20.
 //  Copyright © 2020 JFH Consulting. All rights reserved.
