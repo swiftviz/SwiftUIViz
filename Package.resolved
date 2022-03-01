@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/swiftviz/SwiftViz",
         "state": {
           "branch": null,
-          "revision": "33ce6c2890cb219569cea03d13c02bb54cd6b1a6",
-          "version": "0.1.2"
+          "revision": "771f8a76bc1b6880cc3b4ab1c03b21bd9cd3333b",
+          "version": "0.1.9"
         }
       },
       {
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/nalexn/ViewInspector",
         "state": {
           "branch": null,
-          "revision": "ec943ed718cd293b95f17a2b81e8917d6ed70752",
-          "version": "0.3.8"
+          "revision": "6b88c4ec1fa20cf38f2138052e63c8e79df5d76e",
+          "version": "0.9.1"
         }
       }
     ]

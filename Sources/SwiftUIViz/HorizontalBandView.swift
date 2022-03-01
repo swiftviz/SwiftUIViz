@@ -1,6 +1,6 @@
 //
 //  HorizontalAxisBandView.swift
-//  netlaband
+//  
 //
 //  Created by Joseph Heck on 3/4/20.
 //  Copyright © 2020 JFH Consulting. All rights reserved.
@@ -9,7 +9,7 @@
 import SwiftUI
 import SwiftViz
 
-struct HorizontalBandView<ScaleType: Scale>: View {
+public struct HorizontalBandView<ScaleType: Scale>: View {
     var scale: ScaleType
 
     init(scale: ScaleType) {

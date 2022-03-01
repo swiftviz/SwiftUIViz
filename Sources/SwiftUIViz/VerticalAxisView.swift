@@ -1,6 +1,6 @@
 //
 //  VerticalAxisView.swift
-//  netlaband
+//  
 //
 //  Created by Joseph Heck on 2/12/20.
 //  Copyright © 2020 JFH Consulting. All rights reserved.
@@ -9,7 +9,7 @@
 import SwiftUI
 import SwiftViz
 
-struct VerticalAxisView<ScaleType: Scale>: View {
+public struct VerticalAxisView<ScaleType: Scale>: View {
     let topInset: CGFloat
     let bottomInset: CGFloat
     let leftOffset: CGFloat
@@ -35,7 +35,7 @@ struct VerticalAxisView<ScaleType: Scale>: View {
         return scale.ticks(count: 10, range: geometryRange)
     }
 
-    var body: some View {
+    public var body: some View {
         GeometryReader { geometry in
             ZStack {
                 Path { path in
