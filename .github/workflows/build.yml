@@ -11,27 +11,23 @@ jobs:
     - name: Checkout Project
       uses: actions/checkout@v2
 
-    - name: generate xcode project for xcodebuild
-      run: swift package generate-xcodeproj
+        #- name: generate xcode project for xcodebuild
+        #  run: swift package generate-xcodeproj
 
-    - name: Show Build Version
-      run: xcodebuild -version
+        #- name: Show Build Version
+        #  run: xcodebuild -version
 
-    - name: Show Build Settings
-      run: xcodebuild -showBuildSettings
+        #- name: Show Build Settings
+        #  run: xcodebuild -showBuildSettings
 
-    - name: Show Build SDK
-      run: xcodebuild -showsdks
-
-    - name: Homebrew build helpers install
-      run: |
-        brew bundle
+        #- name: Show Build SDK
+        #  run: xcodebuild -showsdks
 
     - name: build and test
       run: swift test --enable-code-coverage -v
 
-    - name: env review
-      run: env
+        #- name: env review
+        #  run: env
 
     - name: Prepare Code Coverage
       run: xcrun llvm-cov export -format="lcov" .build/debug/SwiftUIVizPackageTests.xctest/Contents/MacOS/SwiftUIVizPackageTests -instr-profile .build/debug/codecov/default.profdata > info.lcov
