@@ -17,7 +17,7 @@ extension VerticalAxisView: Inspectable {}
 
 final class VerticalAxisViewTests: XCTestCase {
     func testVerticalAxisView_init() throws {
-        let exampleView = VerticalAxisView(scale: LinearScale(domain: 0 ... 5.0, isClamped: false))
+        let exampleView = VerticalAxisView(scale: LinearScale.create(0 ... 5.0))
         XCTAssertNotNil(exampleView)
     }
 }

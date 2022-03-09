@@ -9,7 +9,7 @@
 import SwiftUI
 import SwiftViz
 
-public struct VerticalAxisView<ScaleType: Scale>: View {
+public struct VerticalAxisView<ScaleType: Scale>: View where ScaleType.InputType == Double, ScaleType.OutputType == Float {
     let topInset: CGFloat
     let bottomInset: CGFloat
     let leftOffset: CGFloat
@@ -23,16 +23,16 @@ public struct VerticalAxisView<ScaleType: Scale>: View {
         leftOffset = 30
         tickLength = 5
     }
-
-    func tickList(geometry: GeometryProxy) -> [ScaleType.TickType] {
+    
+    func tickList<InputType, OutputType>(geometry: GeometryProxy) -> [Tick<InputType, OutputType>] where ScaleType.InputType == InputType, ScaleType.OutputType == OutputType {
         // protect against Preview sending in stupid values
         // of geometry that can't be made into a reasonable range
         // otherwise the next line will crash preview...
         if geometry.size.width < topInset + bottomInset {
-            return [ScaleType.TickType]()
+            return [Tick<InputType, OutputType>]()
         }
-        let geometryRange = 0.0 ... CGFloat(geometry.size.height - topInset - bottomInset)
-        return scale.ticks(count: 10, range: geometryRange)
+        let upperBound = Float(geometry.size.height - topInset - bottomInset)
+        return scale.ticks(rangeLower: 0, rangeHigher: upperBound)
     }
 
     public var body: some View {
@@ -48,8 +48,8 @@ public struct VerticalAxisView<ScaleType: Scale>: View {
                     path.addLine(to: CGPoint(x: self.leftOffset + self.tickLength, y: geometry.size.height - self.bottomInset))
 
                     for tick in self.tickList(geometry: geometry) {
-                        path.move(to: CGPoint(x: self.leftOffset, y: tick.rangeLocation + self.topInset))
-                        path.addLine(to: CGPoint(x: self.leftOffset + self.tickLength, y: tick.rangeLocation + self.topInset))
+                        path.move(to: CGPoint(x: self.leftOffset, y: CGFloat(tick.rangeLocation) + self.topInset))
+                        path.addLine(to: CGPoint(x: self.leftOffset + self.tickLength, y: CGFloat(tick.rangeLocation) + self.topInset))
                     }
                 }.stroke()
 //                ForEach(self.tickList(geometry: geometry)) { tickStruct in
@@ -63,10 +63,10 @@ public struct VerticalAxisView<ScaleType: Scale>: View {
 struct VerticalAxisView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            VerticalAxisView(scale: LinearScale(domain: 0 ... 1.0, isClamped: false))
+            VerticalAxisView(scale: LinearScale.create(0 ... 1.0))
                 .frame(width: 100, height: 400, alignment: .center)
 
-            VerticalAxisView(scale: LogScale(domain: 1 ... 10.0, isClamped: false))
+             VerticalAxisView(scale: LogScale.DoubleScale(from: 0, to: 10, transform: .none))
                 .frame(width: 100, height: 400, alignment: .center)
         }
     }

@@ -9,19 +9,19 @@
 import SwiftUI
 import SwiftViz
 
-public struct HorizontalBandView<ScaleType: Scale>: View {
+public struct HorizontalBandView<ScaleType: Scale>: View where ScaleType.InputType == Double, ScaleType.OutputType == Float {
     var scale: ScaleType
 
     init(scale: ScaleType) {
         self.scale = scale
     }
 
-    func tickList(geometry: GeometryProxy) -> [ScaleType.TickType] {
+    func tickList<InputType, OutputType>(geometry: GeometryProxy) -> [Tick<InputType, OutputType>] where ScaleType.InputType == InputType, ScaleType.OutputType == OutputType {
         // protect against Preview sending in stupid values
         // of geometry that can't be made into a reasonable range
         // otherwise the next line will crash preview...
-        let geometryRange = 0.0 ... CGFloat(geometry.size.width)
-        return scale.ticks(count: 10, range: geometryRange)
+        let upperBound = Float(geometry.size.width)
+        return scale.ticks(rangeLower: 0.0, rangeHigher: upperBound)
     }
 
     public var body: some View {
@@ -33,8 +33,8 @@ public struct HorizontalBandView<ScaleType: Scale>: View {
                 Path { path in
                     // draw each tick in the line
                     for tick in self.tickList(geometry: geometry) {
-                        path.move(to: CGPoint(x: tick.rangeLocation, y: 0))
-                        path.addLine(to: CGPoint(x: tick.rangeLocation, y: geometry.size.height))
+                        path.move(to: CGPoint(x: CGFloat(tick.rangeLocation), y: 0))
+                        path.addLine(to: CGPoint(x: CGFloat(tick.rangeLocation), y: geometry.size.height))
                     }
                 }.stroke(lineWidth: 0.5)
             }
@@ -49,15 +49,15 @@ public struct HorizontalBandView<ScaleType: Scale>: View {
     struct HorizontalBandView_Previews: PreviewProvider {
         static var previews: some View {
             Group {
-                HorizontalBandView(scale: LinearScale(domain: 0 ... 5.0, isClamped: false))
+                HorizontalBandView(scale: LinearScale.create(0 ... 5.0))
                     .frame(width: 400, height: 50, alignment: .center)
                     .padding()
 
-                HorizontalBandView(scale: LogScale(domain: 1 ... 10.0, isClamped: false))
+                HorizontalBandView(scale: LogScale.DoubleScale(from: 0, to: 10))
                     .frame(width: 400, height: 50, alignment: .center)
                     .padding()
 
-                HorizontalBandView(scale: LogScale(domain: 0.1 ... 100.0, isClamped: false))
+                HorizontalBandView(scale: LogScale.DoubleScale(from: 0.1, to: 100.0))
                     .frame(width: 400, height: 50, alignment: .center)
                     .padding()
             }

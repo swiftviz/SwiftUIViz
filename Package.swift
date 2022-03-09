@@ -17,7 +17,8 @@ let package = Package(
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(url: "https://github.com/swiftviz/SwiftViz", from: "0.0.0"),
+        .package(url: "https://github.com/swiftviz/SwiftViz", branch: "APIiteration"),
+//        .package(url: "https://github.com/swiftviz/SwiftViz", from: "0.0.0"),
         .package(url: "https://github.com/nalexn/ViewInspector", from: "0.0.0"),
     ],
     targets: [

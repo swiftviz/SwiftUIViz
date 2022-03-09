@@ -2,12 +2,21 @@
   "object": {
     "pins": [
       {
+        "package": "swift-numerics",
+        "repositoryURL": "https://github.com/apple/swift-numerics",
+        "state": {
+          "branch": null,
+          "revision": "0a5bc04095a675662cf24757cc0640aa2204253b",
+          "version": "1.0.2"
+        }
+      },
+      {
         "package": "SwiftViz",
         "repositoryURL": "https://github.com/swiftviz/SwiftViz",
         "state": {
-          "branch": null,
-          "revision": "771f8a76bc1b6880cc3b4ab1c03b21bd9cd3333b",
-          "version": "0.1.9"
+          "branch": "APIiteration",
+          "revision": "24dbd6142bc7a9ee56f8c00793064788bd2c1ae9",
+          "version": null
         }
       },
       {

@@ -9,7 +9,7 @@
 import SwiftUI
 import SwiftViz
 
-public struct HorizontalAxisView<ScaleType: Scale>: View {
+public struct HorizontalAxisView<ScaleType: Scale>: View where ScaleType.InputType == Double, ScaleType.OutputType == Float {
     let leftInset: CGFloat
     let rightInset: CGFloat
     var scale: ScaleType
@@ -19,15 +19,15 @@ public struct HorizontalAxisView<ScaleType: Scale>: View {
         self.scale = scale
     }
 
-    func tickList(geometry: GeometryProxy) -> [ScaleType.TickType] {
+    func tickList<InputType, OutputType>(geometry: GeometryProxy) -> [Tick<InputType, OutputType>] where ScaleType.InputType == InputType, ScaleType.OutputType == OutputType {
         // protect against Preview sending in stupid values
         // of geometry that can't be made into a reasonable range
         // otherwise the next line will crash preview...
         if geometry.size.width < leftInset + rightInset {
-            return [ScaleType.TickType]()
+            return [Tick<InputType, OutputType>]()
         }
-        let geometryRange = 0.0 ... CGFloat(geometry.size.width - leftInset - rightInset)
-        return scale.ticks(count: 10, range: geometryRange)
+        let upperBound = Float(geometry.size.width - leftInset - rightInset)
+        return scale.ticks(rangeLower: 0.0, rangeHigher: upperBound)
     }
 
     public var body: some View {
@@ -46,8 +46,8 @@ public struct HorizontalAxisView<ScaleType: Scale>: View {
 
                     // draw each tick in the line
                     for tick in self.tickList(geometry: geometry) {
-                        path.move(to: CGPoint(x: tick.rangeLocation + self.leftInset, y: 3))
-                        path.addLine(to: CGPoint(x: tick.rangeLocation + self.leftInset, y: 8))
+                        path.move(to: CGPoint(x: CGFloat(tick.rangeLocation) + self.leftInset, y: 3))
+                        path.addLine(to: CGPoint(x: CGFloat(tick.rangeLocation) + self.leftInset, y: 8))
                     }
                 }.stroke()
             }
@@ -63,12 +63,12 @@ public struct HorizontalAxisView<ScaleType: Scale>: View {
     struct HorizontalAxisView_Previews: PreviewProvider {
         static var previews: some View {
             Group {
-                HorizontalAxisView(scale: LinearScale(domain: 0 ... 5.0, isClamped: false),
+                HorizontalAxisView(scale: LinearScale.create(0 ... 5.0),
                                    leftInset: 25.0,
                                    rightInset: 25.0)
                     .frame(width: 400, height: 50, alignment: .center)
 
-                HorizontalAxisView(scale: LogScale(domain: 1 ... 10.0, isClamped: false),
+                HorizontalAxisView(scale: LogScale.DoubleScale(from: 0, to: 10),
                                    leftInset: 25.0,
                                    rightInset: 25.0)
                     .frame(width: 400, height: 50, alignment: .center)
