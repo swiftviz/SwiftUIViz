@@ -17,7 +17,7 @@ extension HorizontalBandView: Inspectable {}
 
 final class HorizontalBandViewTests: XCTestCase {
     func testHorizontalBandView_init() throws {
-        let exampleView = HorizontalBandView(scale: LinearScale(domain: 0 ... 5.0, isClamped: false))
+        let exampleView = HorizontalBandView(scale: LinearScale.create(0 ... 5.0))
         XCTAssertNotNil(exampleView)
     }
 }

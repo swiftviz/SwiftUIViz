@@ -17,7 +17,7 @@ extension HorizontalAxisView: Inspectable {}
 
 final class HorizontalAxisViewTests: XCTestCase {
     func testHorizontalAxisView_init() throws {
-        let exampleView = HorizontalAxisView(scale: LinearScale(domain: 0 ... 5.0, isClamped: false),
+        let exampleView = HorizontalAxisView(scale: LinearScale.create(0 ... 5.0),
                                              leftInset: 25.0,
                                              rightInset: 25.0)
         let path = try exampleView.inspect().geometryReader().zStack().shape(0)
