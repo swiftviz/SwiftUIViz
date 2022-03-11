@@ -9,7 +9,7 @@
 import SwiftUI
 import SwiftViz
 
-public struct HorizontalBandView<ScaleType: Scale>: View where ScaleType.InputType == Double, ScaleType.OutputType == Float {
+public struct HorizontalBandView<ScaleType: TickScale>: View where ScaleType.InputType == Double, ScaleType.OutputType == Float {
     var scale: ScaleType
 
     init(scale: ScaleType) {

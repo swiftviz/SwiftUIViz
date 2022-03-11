@@ -9,7 +9,7 @@
 import SwiftUI
 import SwiftViz
 
-public struct VerticalAxisView<ScaleType: Scale>: View where ScaleType.InputType == Double, ScaleType.OutputType == Float {
+public struct VerticalAxisView<ScaleType: TickScale>: View where ScaleType.InputType == Double, ScaleType.OutputType == Float {
     let topInset: CGFloat
     let bottomInset: CGFloat
     let leftOffset: CGFloat
@@ -23,7 +23,7 @@ public struct VerticalAxisView<ScaleType: Scale>: View where ScaleType.InputType
         leftOffset = 30
         tickLength = 5
     }
-    
+
     func tickList<InputType, OutputType>(geometry: GeometryProxy) -> [Tick<InputType, OutputType>] where ScaleType.InputType == InputType, ScaleType.OutputType == OutputType {
         // protect against Preview sending in stupid values
         // of geometry that can't be made into a reasonable range
@@ -66,7 +66,7 @@ struct VerticalAxisView_Previews: PreviewProvider {
             VerticalAxisView(scale: LinearScale.create(0 ... 1.0))
                 .frame(width: 100, height: 400, alignment: .center)
 
-             VerticalAxisView(scale: LogScale.DoubleScale(from: 0, to: 10, transform: .none))
+            VerticalAxisView(scale: LogScale.DoubleScale(from: 0, to: 10, transform: .none))
                 .frame(width: 100, height: 400, alignment: .center)
         }
     }

@@ -9,7 +9,7 @@
 import SwiftUI
 import SwiftViz
 
-public struct HorizontalAxisView<ScaleType: Scale>: View where ScaleType.InputType == Double, ScaleType.OutputType == Float {
+public struct HorizontalAxisView<ScaleType: TickScale>: View where ScaleType.InputType == Double, ScaleType.OutputType == Float {
     let leftInset: CGFloat
     let rightInset: CGFloat
     var scale: ScaleType
